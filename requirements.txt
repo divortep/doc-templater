@@ -1,0 +1,16 @@
+Click==7.0
+Django==2.2
+django-dotenv==1.4.2
+django-webpack-loader==0.6.0
+djangorestframework==3.9.2
+docx2txt==0.7
+docxtpl==0.5.17
+Jinja2==2.10.1
+lxml==4.3.3
+MarkupSafe==1.1.1
+pip-tools==3.6.0
+psycopg2==2.8.2
+python-docx==0.8.7
+pytz==2019.1
+six==1.12.0
+sqlparse==0.3.0
