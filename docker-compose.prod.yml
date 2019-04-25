@@ -1,0 +1,25 @@
+version: '3'
+services:
+    frontend:
+        build:
+            context: ./frontend
+            args:
+              - ENV=production
+    backend:
+        build:
+            context: .
+            args:
+              - DEBUG="False"
+        restart: always
+        command:
+            ["/app/wait-for-postgres.sh", "db", "${POSTGRES_PASSWORD}", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+        ports:
+            - "80:8000"
+        depends_on:
+            - frontend
+            - db
+    db:
+        image: "postgres:11.2-alpine"
+        restart: always
+        ports:
+            - "5432:5432"

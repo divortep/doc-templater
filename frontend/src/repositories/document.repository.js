@@ -1,7 +1,7 @@
-import Repository, {baseURL} from "./base.repository";
+import Repository, {apiPath} from "./base.repository";
 
 const resource = '/document';
-export const UPLOAD_URL = `${baseURL}${resource}/upload`;
+export const UPLOAD_URL = `${apiPath}${resource}/upload`;
 
 export default {
   getAll() {

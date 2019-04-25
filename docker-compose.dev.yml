@@ -1,21 +1,21 @@
 version: '3'
 services:
     frontend:
-        build: ./frontend
-        restart: always
+        build:
+            context: ./frontend
+            args:
+              - ENV=development
         command: npm run serve
-        environment:
-             - NODE_ENV=${NODE_ENV}
         ports:
             - "8080:8080"
         volumes:
-            - ./frontend:/home/node/app/frontend:cached
-            - /home/node/app/frontend/node_modules
-        depends_on:
-            - backend
+            - ./frontend:/home/node/app:cached
+            - /home/node/app/node_modules
     backend:
-        build: .
-        restart: always
+        build:
+            context: .
+            args:
+              - DEBUG=True
         command:
             ["/app/wait-for-postgres.sh", "db", "${POSTGRES_PASSWORD}", "python", "manage.py", "runserver", "0.0.0.0:8000"]
         ports:
@@ -23,12 +23,11 @@ services:
         volumes:
             - .:/app:cached
         depends_on:
+            - frontend
             - db
     db:
         image: "postgres:11.2-alpine"
-        volumes:
-            - ./postgres_data:/var/lib/postgresql/data/
         ports:
             - "5432:5432"
-        environment:
-            POSTGRES_PASSWORD: postgres
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data/

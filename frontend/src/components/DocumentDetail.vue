@@ -12,7 +12,7 @@
         table-class="placeholders-table"
     >
       <template v-slot:top-right>
-        <q-btn rounded size="sm" color="primary" label="Save as.." @click="saveDoc()"/>
+        <q-btn rounded unelevated size="sm" color="primary" label="Save as.." @click="saveDoc()"/>
       </template>
       <template v-slot:body="props">
         <q-tr :props="props">
